@@ -10,6 +10,18 @@ on:
       - '**/*.json'
       - '**/*.yml'
       - '**/*.yaml'
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - '**/*.js'
+      - '**/*.ts'
+      - '**/*.jsx'
+      - '**/*.tsx'
+      - '**/*.json'
+      - '**/*.yml'
+      - '**/*.yaml'
 
 jobs:
   setup:
