@@ -1,0 +1,46 @@
+name: lint
+
+on:
+  pull_request:
+    paths:
+      - '**/*.js'
+      - '**/*.ts'
+      - '**/*.jsx'
+      - '**/*.tsx'
+      - '**/*.json'
+      - '**/*.yml'
+      - '**/*.yaml'
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - '**/*.js'
+      - '**/*.ts'
+      - '**/*.jsx'
+      - '**/*.tsx'
+      - '**/*.json'
+      - '**/*.yml'
+      - '**/*.yaml'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    name: setup
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.head_ref }}
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: npm install
+        run: npm i
+      - name: check
+        run: |
+          npm run prettier:check
+          npm run build
